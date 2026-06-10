@@ -149,8 +149,9 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
     description: 'Switches mecánicos hot-swap y sensor óptico de alta precisión.',
     category: 'perifericos',
     image: {
-      src: '/images/kit-perifericos.svg',
+      src: '/images/kit_perifericos.png',
       alt: 'Kit profesional de teclado mecánico y mouse',
+      photo: true,
     },
   },
   {
@@ -161,8 +162,9 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
     description: 'Diseño vertical, 8 botones programables y peso ajustable.',
     category: 'perifericos',
     image: {
-      src: '/images/setup-neobyte-pro.svg',
+      src: '/images/razer_mouse.png',
       alt: 'Mouse ergonómico inalámbrico para productividad',
+      photo: true,
     },
   },
   {
@@ -173,8 +175,9 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
     description: 'Conecta tu ecosistema IoT con seguridad y automatizaciones avanzadas.',
     category: 'networking',
     image: {
-      src: '/images/hub-domotica.svg',
+      src: '/images/hub_domotica.png',
       alt: 'Hub de domótica inteligente Wi-Fi 6',
+      photo: true,
     },
   },
   {
@@ -185,8 +188,9 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
     description: 'Cobertura hasta 300 m² con tres nodos y control desde app móvil.',
     category: 'networking',
     image: {
-      src: '/images/smart-home-nexus.svg',
+      src: '/images/router.png',
       alt: 'Sistema de red mesh Wi-Fi 6E para hogar',
+      photo: true,
     },
   },
   {
@@ -197,8 +201,9 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
     description: 'Pantalla calibrada, GPU dedicada y almacenamiento NVMe de alta velocidad.',
     category: 'laptops',
     image: {
-      src: '/images/laptop-creator.svg',
+      src: '/images/laptop.png',
       alt: 'Laptop de 16" profesional para creadores',
+      photo: true,
     },
   },
   {
@@ -209,8 +214,9 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
     description: 'Pantalla 165Hz, RTX dedicada y teclado RGB por zona.',
     category: 'laptops',
     image: {
-      src: '/images/laptop-studio-vision.svg',
+      src: '/images/Laptop_15.png',
       alt: 'Laptop gamer de 15 pulgadas con tarjeta gráfica dedicada',
+      photo: true,
     },
   },
   {
@@ -221,8 +227,9 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
     description: 'Pantalla OLED 120Hz, cámara de 50MP y carga rápida de 65W.',
     category: 'celulares',
     image: {
-      src: '/images/smartphone-neo-x.svg',
+      src: '/images/telefono_neox.png',
       alt: 'Smartphone Neo X de 256GB',
+      photo: true,
     },
   },
   {
@@ -233,8 +240,9 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
     description: 'Chip de última generación, batería para todo el día y zoom óptico 3x.',
     category: 'celulares',
     image: {
-      src: '/images/smartphone-andes-pro.svg',
+      src: '/images/telefono_andes.png',
       alt: 'Celular Andes Pro 5G de 512GB',
+      photo: true,
     },
   },
   {
@@ -246,8 +254,9 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
     category: 'celulares',
     isOffer: true,
     image: {
-      src: '/images/smartphone-neo-x.svg',
+      src: '/images/telefono_lite.png',
       alt: 'Smartphone económico Neo Lite de 128GB',
+      photo: true,
     },
   },
   {
