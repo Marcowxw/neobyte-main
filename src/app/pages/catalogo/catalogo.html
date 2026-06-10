@@ -1,0 +1,139 @@
+<main class="catalog-page">
+  <section class="catalog-hero shell">
+    <div>
+      <p class="kicker">Catalogo NeoByte</p>
+      <h1>Hardware y electronica para armar tu setup y tu vida digital</h1>
+      <p>
+        Encuentra componentes de ultima generacion, celulares, consolas, tablets y perifericos profesionales.
+      </p>
+      <p class="filter-summary">
+        Mostrando <strong>{{ resultCount() }}</strong>
+        {{ resultCount() === 1 ? 'producto' : 'productos' }} en
+        <strong>{{ activeFilterLabel() }}</strong>
+        @if (offersOnly()) {
+          <span class="filter-tag">Solo ofertas</span>
+        }
+      </p>
+    </div>
+    <a class="back-link" routerLink="/">Volver al inicio</a>
+  </section>
+
+  <section class="catalog-layout shell">
+    <aside class="filters" aria-label="Filtros de catalogo">
+      <div class="filters-header">
+        <h2>Filtros</h2>
+        @if (activeCategory() !== 'todos' || offersOnly()) {
+          <button type="button" class="clear-filters" (click)="clearFilters()">Limpiar</button>
+        }
+      </div>
+
+      <ul class="filter-list" role="list">
+        @for (filter of filters; track filter.slug) {
+          <li>
+            <button
+              type="button"
+              class="filter-chip"
+              [class.active]="isCategoryActive(filter.slug)"
+              [attr.aria-pressed]="isCategoryActive(filter.slug)"
+              (click)="setCategory(filter.slug)"
+            >
+              {{ filter.label }}
+            </button>
+          </li>
+        }
+      </ul>
+
+      <button
+        type="button"
+        class="offers-btn"
+        [class.active]="offersOnly()"
+        [attr.aria-pressed]="offersOnly()"
+        (click)="toggleOffersOnly()"
+      >
+        Ver ofertas activas
+      </button>
+    </aside>
+
+    <div class="catalog-content">
+      @if (paginatedProducts().length === 0) {
+        <div class="empty-state">
+          <p>No hay productos con estos filtros.</p>
+          <button type="button" (click)="clearFilters()">Ver todo el catalogo</button>
+        </div>
+      } @else {
+        <div class="products">
+          @for (product of paginatedProducts(); track product.id; let i = $index) {
+            <article class="product-card">
+              <div class="product-image-container" [class.photo]="product.image.photo">
+                <img
+                  [src]="product.image.src"
+                  [alt]="product.image.alt"
+                  [attr.loading]="i === 0 ? 'eager' : 'lazy'"
+                  [attr.fetchpriority]="i === 0 ? 'high' : 'auto'"
+                  class="product-image"
+                  [class.product-image--photo]="product.image.photo"
+                />
+              </div>
+              <div class="product-content">
+                <p class="badge">{{ product.badge }}</p>
+                <h3>{{ product.name }}</h3>
+                <p>{{ product.description }}</p>
+                <div class="row">
+                  <span class="price">${{ product.price | number:'0.0-0':'es-CL' }}</span>
+                  <div class="add-cta">
+                    <button
+                      class="add-btn"
+                      (click)="addToCart(product)"
+                      [disabled]="isAddLocked(product.id)"
+                    >
+                      {{ isAddLocked(product.id) ? 'Agregado' : 'Agregar' }}
+                    </button>
+                    @if (isAddFeedbackVisible(product.id)) {
+                      <span class="add-feedback" aria-hidden="true">
+                        +{{ getAddFeedbackCount(product.id) }}
+                      </span>
+                    }
+                  </div>
+                </div>
+              </div>
+            </article>
+          }
+        </div>
+
+        @if (totalPages() > 1) {
+          <nav class="pagination" aria-label="Paginacion del catalogo">
+            <button
+              type="button"
+              class="page-nav"
+              (click)="goToPreviousPage()"
+              [disabled]="currentPage() === 1"
+            >
+              Anterior
+            </button>
+
+            @for (page of pageNumbers(); track page) {
+              <button
+                type="button"
+                class="page-tab"
+                (click)="goToPage(page)"
+                [class.active]="currentPage() === page"
+                [attr.aria-current]="currentPage() === page ? 'page' : null"
+              >
+                {{ page }}
+              </button>
+            }
+
+            <button
+              type="button"
+              class="page-nav"
+              (click)="goToNextPage()"
+              [disabled]="currentPage() === totalPages()"
+            >
+              Siguiente
+            </button>
+          </nav>
+        }
+      }
+    </div>
+  </section>
+</main>

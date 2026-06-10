@@ -1,0 +1,128 @@
+<main class="inventario-page">
+  <!-- Acceso denegado para no-admins -->
+  <div class="access-denied" *ngIf="!isAdmin()">
+    <div class="denied-icon">🔒</div>
+    <h1>Acceso restringido</h1>
+    <p>Esta sección es exclusiva para administradores de NeoByte.</p>
+    <a routerLink="/" class="back-btn">Volver al inicio</a>
+  </div>
+
+  <!-- Panel de inventario (solo admins) -->
+  <div class="inventario-content" *ngIf="isAdmin()">
+    <header class="inventario-header">
+      <div class="header-title">
+        <span class="header-badge">Stock</span>
+        <h1>Panel de Stock</h1>
+        <p class="header-sub">Gestiona la disponibilidad y rotación de productos de NeoByte</p>
+      </div>
+    </header>
+
+    <!-- Tarjetas de resumen -->
+    <section class="stats-grid" aria-label="Resumen de inventario">
+      <article class="stat-card stat-total">
+        <div class="stat-icon">📦</div>
+        <div class="stat-info">
+          <span class="stat-value">{{ stats().total }}</span>
+          <span class="stat-label">Productos</span>
+        </div>
+      </article>
+      <article class="stat-card stat-ok">
+        <div class="stat-icon">✅</div>
+        <div class="stat-info">
+          <span class="stat-value">{{ stats().ok }}</span>
+          <span class="stat-label">Con stock OK</span>
+        </div>
+      </article>
+      <article class="stat-card stat-low">
+        <div class="stat-icon">⚠️</div>
+        <div class="stat-info">
+          <span class="stat-value">{{ stats().low }}</span>
+          <span class="stat-label">Stock bajo</span>
+        </div>
+      </article>
+      <article class="stat-card stat-critical">
+        <div class="stat-icon">🔴</div>
+        <div class="stat-info">
+          <span class="stat-value">{{ stats().critical }}</span>
+          <span class="stat-label">Sin stock</span>
+        </div>
+      </article>
+      <article class="stat-card stat-value-card">
+        <div class="stat-icon">💰</div>
+        <div class="stat-info">
+          <span class="stat-value">${{ formatPrice(stats().totalValue) }}</span>
+          <span class="stat-label">Valor total en stock</span>
+        </div>
+      </article>
+    </section>
+
+    <!-- Barra de filtros -->
+    <section class="filter-bar" aria-label="Filtros de inventario">
+      <div class="search-wrap">
+        <span class="search-icon" aria-hidden="true">🔍</span>
+        <input
+          id="inventario-search"
+          type="text"
+          class="search-input"
+          placeholder="Buscar producto o categoría..."
+          [value]="searchTerm()"
+          (input)="onSearch($event)"
+          aria-label="Buscar producto"
+        />
+      </div>
+
+      <div class="category-chips" role="group" aria-label="Filtrar por categoría">
+        <button
+          *ngFor="let cat of categories()"
+          class="chip"
+          [class.active]="filterCategory() === cat"
+          (click)="setCategory(cat)"
+          [attr.aria-pressed]="filterCategory() === cat"
+        >
+          {{ cat }}
+        </button>
+      </div>
+    </section>
+
+    <!-- Tabla de productos -->
+    <section class="table-section">
+      <div class="table-wrap">
+        <table class="inventory-table" aria-label="Tabla de inventario">
+          <thead>
+            <tr>
+              <th scope="col">Producto</th>
+              <th scope="col">Categoría</th>
+              <th scope="col">Stock</th>
+              <th scope="col">Precio</th>
+              <th scope="col">Estado</th>
+              <th scope="col">Valor en stock</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let p of filteredProducts()" class="table-row">
+              <td class="td-name">{{ p.name }}</td>
+              <td class="td-cat">
+                <span class="cat-tag">{{ p.category }}</span>
+              </td>
+              <td class="td-stock">
+                <span class="stock-num" [class.zero]="p.stock === 0">{{ p.stock }}</span>
+              </td>
+              <td class="td-price">${{ formatPrice(p.price) }}</td>
+              <td class="td-status">
+                <span class="status-badge" [attr.data-status]="p.status">
+                  {{ getStatusLabel(p.status) }}
+                </span>
+              </td>
+              <td class="td-total">${{ formatPrice(p.price * p.stock) }}</td>
+            </tr>
+
+            <!-- Sin resultados -->
+            <tr *ngIf="filteredProducts().length === 0">
+              <td colspan="6" class="no-results">Sin resultados para "{{ searchTerm() }}"</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+</main>

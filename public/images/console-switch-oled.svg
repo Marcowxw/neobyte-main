@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="Consola Switch OLED">
+  <defs>
+    <linearGradient id="sBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#111827" />
+      <stop offset="100%" stop-color="#0f766e" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#sBg)" />
+  <rect x="210" y="140" width="380" height="220" rx="30" fill="#111827" stroke="#334155" stroke-width="8" />
+  <rect x="300" y="175" width="200" height="150" rx="12" fill="#22d3ee" />
+  <rect x="235" y="180" width="50" height="140" rx="20" fill="#ef4444" />
+  <rect x="515" y="180" width="50" height="140" rx="20" fill="#2563eb" />
+  <circle cx="260" cy="240" r="10" fill="#fee2e2" />
+  <circle cx="540" cy="240" r="10" fill="#dbeafe" />
+</svg>

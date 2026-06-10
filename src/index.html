@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Neobyte</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#143731">
+  <script>
+    (function () {
+      try {
+        var storageKey = 'neobyte-theme';
+        var theme = localStorage.getItem(storageKey);
+
+        if (theme !== 'light' && theme !== 'dark') {
+          theme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        }
+
+        document.documentElement.dataset.theme = theme;
+        document.documentElement.style.colorScheme = theme;
+        document.body.classList.toggle('theme-light', theme === 'light');
+        document.body.classList.toggle('theme-dark', theme === 'dark');
+
+        var themeColor = document.querySelector('meta[name="theme-color"]');
+        if (themeColor) {
+          themeColor.setAttribute('content', theme === 'light' ? '#ceff8c' : '#143731');
+        }
+      } catch (error) {
+        // Si el navegador bloquea storage, la app arranca con el tema por defecto.
+      }
+    })();
+  </script>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg?v=3">
+  <link rel="apple-touch-icon" href="favicon.svg?v=3">
+</head>
+<body>
+  <app-root></app-root>
+</body>
+</html>

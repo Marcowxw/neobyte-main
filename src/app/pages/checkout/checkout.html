@@ -1,0 +1,152 @@
+<main class="checkout-page">
+  <section class="checkout-shell">
+    <header class="checkout-top">
+      <div>
+        <p class="kicker">NeoByte Checkout</p>
+        <h1>Finaliza tu compra</h1>
+      </div>
+      <a routerLink="/catalogo" class="back-link">Volver al catalogo</a>
+    </header>
+
+    <!-- Vista condicional: si no hay items, mostramos estado vacío y CTA de regreso -->
+    <div *ngIf="cartService.itemCount() === 0" class="empty-card">
+      <h2>Tu carrito esta vacio</h2>
+      <p>Agrega productos para continuar con el pago.</p>
+      <a routerLink="/catalogo" class="checkout-btn">Ir al catalogo</a>
+    </div>
+
+    <!-- Si hay productos, aparece el layout completo de resumen + pago -->
+    <section *ngIf="cartService.itemCount() > 0" class="checkout-layout">
+      <article class="summary-card">
+        <h2>Resumen del pedido</h2>
+        <div class="summary-items">
+          <!-- *ngFor pinta cada línea del resumen según lo que haya en el signal items$() -->
+          <div class="summary-item" *ngFor="let item of cartService.items$()">
+            <div>
+              <h3>{{ item.name }}</h3>
+              <p>Cantidad: {{ item.quantity }}</p>
+            </div>
+            <strong>${{ item.price * item.quantity | number:'0.0-0':'es-CL' }}</strong>
+          </div>
+        </div>
+
+        <div class="summary-total">
+          <span>Total</span>
+          <strong>${{ cartService.total() | number:'0.0-0':'es-CL' }}</strong>
+        </div>
+      </article>
+
+      <article class="payment-card">
+        <h2>Pago y datos</h2>
+
+        <!-- Mientras Firebase/Auth valida sesión, evitamos mostrar formulario final -->
+        <div *ngIf="authService.authLoading$()" class="status-note">
+          Verificando sesion...
+        </div>
+
+        <div *ngIf="!authService.authLoading$() && !currentUser()" class="status-note">
+          Necesitas autenticarte para pagar. <a routerLink="/checkout/auth" class="inline-link">Ir a login/registro</a>
+        </div>
+
+        <!-- Formulario habilitado solo cuando existe usuario autenticado -->
+        <div *ngIf="currentUser()" class="payment-form">
+          <label class="field-label" for="buyerName">Nombre completo</label>
+          <input
+            id="buyerName"
+            class="field-input"
+            type="text"
+            [value]="buyerName()"
+            (input)="onBuyerNameInput($event)"
+            [disabled]="checkoutLoading()"
+            placeholder="Ej: Jose Maria Lopez"
+            autocomplete="name"
+            maxlength="80"
+          />
+          <p class="field-hint">
+            Primer nombre, segundo nombre y apellido. Cada palabra: minimo 3 letras, maximo 25.
+          </p>
+
+          <label class="field-label" for="buyerRut">RUT</label>
+          <input
+            id="buyerRut"
+            class="field-input"
+            type="text"
+            [value]="buyerRut()"
+            (input)="onBuyerRutInput($event)"
+            [disabled]="checkoutLoading()"
+            placeholder="12.345.678-5"
+          />
+
+          <label class="field-label" for="buyerPhone">Telefono</label>
+          <input
+            id="buyerPhone"
+            class="field-input"
+            type="tel"
+            [value]="buyerPhone()"
+            (input)="onBuyerPhoneInput($event)"
+            [disabled]="checkoutLoading()"
+            placeholder="+56 9 1234 5678"
+          />
+
+          <label class="field-label" for="buyerEmail">Correo</label>
+          <input
+            id="buyerEmail"
+            class="field-input"
+            type="email"
+            [value]="buyerEmail()"
+            (input)="onBuyerEmailInput($event)"
+            [disabled]="checkoutLoading()"
+            placeholder="correo@ejemplo.com"
+          />
+
+          <label class="field-label" for="deliveryMethod">Metodo de entrega</label>
+          <select
+            id="deliveryMethod"
+            class="field-input"
+            [value]="deliveryMethod()"
+            (change)="onDeliveryMethodChange($event)"
+            [disabled]="checkoutLoading()"
+          >
+            <option value="retiro_tienda">Retiro en tienda</option>
+            <option value="despacho">Despacho a domicilio</option>
+          </select>
+
+          <div *ngIf="deliveryMethod() === 'despacho'">
+            <label class="field-label" for="buyerAddress">Direccion de despacho</label>
+            <input
+              id="buyerAddress"
+              class="field-input"
+              type="text"
+              [value]="buyerAddress()"
+              (input)="onBuyerAddressInput($event)"
+              [disabled]="checkoutLoading()"
+              placeholder="Calle, numero, comuna, region"
+            />
+          </div>
+
+          <label class="field-label" for="paymentMethod">Medio de pago</label>
+          <select
+            id="paymentMethod"
+            class="field-input"
+            [value]="paymentMethod()"
+            (change)="onPaymentMethodChange($event)"
+            [disabled]="checkoutLoading()"
+          >
+            <option value="mercado_pago">Mercado Pago</option>
+            <option value="webpay">Webpay</option>
+            <option value="transferencia">Transferencia</option>
+          </select>
+
+          <!-- Mensajes reactivos: se muestran solo cuando la signal tiene contenido -->
+          <div *ngIf="checkoutError()" class="checkout-message checkout-error">{{ checkoutError() }}</div>
+          <div *ngIf="checkoutSuccess()" class="checkout-message checkout-success">{{ checkoutSuccess() }}</div>
+
+          <!-- Botón bloqueado durante proceso para evitar doble envío de orden -->
+          <button class="checkout-btn" (click)="checkout()" [disabled]="checkoutLoading()">
+            {{ checkoutLoading() ? 'Procesando compra...' : 'Proceder al Pago' }}
+          </button>
+        </div>
+      </article>
+    </section>
+  </section>
+</main>

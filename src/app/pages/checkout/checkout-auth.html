@@ -1,0 +1,71 @@
+<main class="checkout-auth-page">
+  <section class="auth-shell">
+    <header class="auth-top">
+      <div>
+        <p class="kicker">NeoByte Checkout</p>
+        <h1>Acceso para continuar al pago</h1>
+      </div>
+      <a routerLink="/catalogo" class="back-link">Volver al catalogo</a>
+    </header>
+
+    <!-- Reutiliza lógica de carrito: sin items no tiene sentido autenticarse para pagar -->
+    <div *ngIf="cartService.itemCount() === 0" class="empty-card">
+      <h2>Tu carrito esta vacio</h2>
+      <p>Agrega productos para continuar con el checkout.</p>
+      <a routerLink="/catalogo" class="checkout-btn">Ir al catalogo</a>
+    </div>
+
+    <article *ngIf="cartService.itemCount() > 0" class="auth-card">
+      <p class="status-note">Inicia sesion o crea una cuenta para completar tu compra.</p>
+
+      <div class="auth-switch">
+        <!-- [class.active] aplica estilo según el modo actual (login/register) -->
+        <button class="switch-btn" [class.active]="authMode() === 'login'" (click)="setAuthMode('login')">Iniciar sesion</button>
+        <button class="switch-btn" [class.active]="authMode() === 'register'" (click)="setAuthMode('register')">Crear cuenta</button>
+      </div>
+
+      <!-- Nombre solo se pide en registro: flujo más corto para login -->
+      <label *ngIf="authMode() === 'register'" class="field-label" for="authName">Nombre</label>
+      <input
+        *ngIf="authMode() === 'register'"
+        id="authName"
+        class="field-input"
+        type="text"
+        [value]="authName()"
+        (input)="onAuthNameInput($event)"
+        [disabled]="authActionLoading()"
+        placeholder="Tu nombre"
+      />
+
+      <label class="field-label" for="authEmail">Correo</label>
+      <input
+        id="authEmail"
+        class="field-input"
+        type="email"
+        [value]="authEmail()"
+        (input)="onAuthEmailInput($event)"
+        [disabled]="authActionLoading()"
+        placeholder="correo@ejemplo.com"
+      />
+
+      <label class="field-label" for="authPassword">Contrasena</label>
+      <input
+        id="authPassword"
+        class="field-input"
+        type="password"
+        [value]="authPassword()"
+        (input)="onAuthPasswordInput($event)"
+        [disabled]="authActionLoading()"
+        placeholder="Minimo 6 caracteres"
+      />
+
+      <!-- Error reactivo proveniente del servicio de auth -->
+      <div *ngIf="authActionError()" class="checkout-message checkout-error">{{ authActionError() }}</div>
+
+      <!-- Texto del botón cambia por modo para reducir ambigüedad en usuario final -->
+      <button class="checkout-btn" (click)="submitAuth()" [disabled]="authActionLoading()">
+        {{ authActionLoading() ? 'Procesando...' : (authMode() === 'register' ? 'Crear cuenta y continuar' : 'Iniciar sesion y continuar') }}
+      </button>
+    </article>
+  </section>
+</main>

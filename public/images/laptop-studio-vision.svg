@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Laptop Studio Vision</title>
+  <desc id="desc">Ilustracion de laptop premium para creadores.</desc>
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a4038"/>
+      <stop offset="100%" stop-color="#0f2f29"/>
+    </linearGradient>
+    <linearGradient id="screen" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ceff8c"/>
+      <stop offset="100%" stop-color="#61b954"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="760" fill="url(#bg2)"/>
+  <rect x="180" y="150" width="840" height="430" rx="28" fill="#122f2a" stroke="#3b8f7d" stroke-width="6"/>
+  <rect x="220" y="190" width="760" height="340" rx="18" fill="#0a221e"/>
+  <path d="M260 475C360 380 460 510 570 430C660 365 760 390 940 500V530H260Z" fill="url(#screen)"/>
+  <rect x="250" y="585" width="700" height="34" rx="16" fill="#1a443b"/>
+  <rect x="130" y="620" width="940" height="40" rx="18" fill="#0b2622"/>
+  <rect x="530" y="625" width="140" height="16" rx="8" fill="#2f7d6c"/>
+  <circle cx="1040" cy="110" r="110" fill="#ceff8c" opacity="0.15"/>
+  <text x="94" y="110" fill="#edffd5" font-family="Rajdhani, Arial, sans-serif" font-size="46" font-weight="700">Laptop Studio Vision</text>
+</svg>

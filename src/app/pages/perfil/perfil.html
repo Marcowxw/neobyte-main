@@ -1,0 +1,182 @@
+<main class="profile-page">
+  <section class="shell hero">
+    <p class="kicker">Modulo 6</p>
+    <h1>Mi perfil</h1>
+    <p>Gestiona tus datos personales, direcciones, metodos de pago e historial de compras.</p>
+    <a class="back-link" routerLink="/">Volver al inicio</a>
+  </section>
+
+  <section class="shell profile-layout">
+    <aside class="profile-sidebar">
+      <div class="user-card">
+        <div class="avatar">JL</div>
+        <h2>Juan Loaiza</h2>
+        <p>juan.loaiza@neobyte.cl</p>
+        <button class="logout-btn">Cerrar sesion</button>
+      </div>
+
+      <nav class="tabs">
+        <button class="tab active">Datos personales</button>
+        <button class="tab">Direcciones</button>
+        <button class="tab">Metodos de pago</button>
+        <button class="tab">Historial</button>
+        <button class="tab">Configuracion</button>
+      </nav>
+    </aside>
+
+    <article class="profile-content">
+      <h2>Datos personales</h2>
+      <div class="form-group">
+        <label>Nombre completo</label>
+        <p>Juan Loaiza Perez</p>
+      </div>
+      <div class="form-group">
+        <label>Correo electronico</label>
+        <p>juan.loaiza@neobyte.cl</p>
+      </div>
+      <div class="form-group">
+        <label>Telefono</label>
+        <p>+56 9 8765 4321</p>
+      </div>
+      <div class="form-group">
+        <label>RUT</label>
+        <p>12.345.678-9</p>
+      </div>
+      <button class="btn-edit">Editar datos</button>
+    </article>
+
+    <article class="profile-content">
+      <h2>Direcciones de envio</h2>
+      <div class="address-card">
+        <div class="address-header">
+          <h3>Casa</h3>
+          <span class="badge-primary">Principal</span>
+        </div>
+        <p>Avenida Providencia 1234, Depto 5B</p>
+        <p>Provincia: Santiago</p>
+        <p>Codigo postal: 7500000</p>
+        <button class="btn-edit">Editar</button>
+      </div>
+
+      <div class="address-card">
+        <div class="address-header">
+          <h3>Oficina</h3>
+        </div>
+        <p>Calle Teatinos 567, Piso 8</p>
+        <p>Provincia: Santiago</p>
+        <p>Codigo postal: 8320000</p>
+        <button class="btn-edit">Editar</button>
+      </div>
+
+      <button class="btn-add">+ Agregar direccion</button>
+    </article>
+
+    <article class="profile-content">
+      <h2>Metodos de pago</h2>
+      <div class="payment-card">
+        <div class="card-header">
+          <span class="card-type">Visa</span>
+          <span class="badge-primary">Principal</span>
+        </div>
+        <p>**** **** **** 4242</p>
+        <p>Vencimiento: 12/2027</p>
+        <button class="btn-edit">Editar</button>
+      </div>
+
+      <div class="payment-card">
+        <div class="card-header">
+          <span class="card-type">Mastercard</span>
+        </div>
+        <p>**** **** **** 8765</p>
+        <p>Vencimiento: 08/2026</p>
+        <button class="btn-edit">Editar</button>
+      </div>
+
+      <button class="btn-add">+ Agregar metodo de pago</button>
+    </article>
+
+    <article class="profile-content">
+      <h2>Historial de compras</h2>
+      <div class="purchase-list">
+        <div class="purchase-item">
+          <div class="purchase-info">
+            <p><strong>#ORD-2026-001</strong></p>
+            <p>22 Abr 2026</p>
+          </div>
+          <div class="purchase-items">
+            <span>RTX 5070 Ti, Monitor 32"</span>
+          </div>
+          <div class="purchase-total">
+            <strong>$2,499,000</strong>
+          </div>
+          <span class="badge-delivered">Entregado</span>
+        </div>
+
+        <div class="purchase-item">
+          <div class="purchase-info">
+            <p><strong>#ORD-2026-002</strong></p>
+            <p>20 Abr 2026</p>
+          </div>
+          <div class="purchase-items">
+            <span>Smartwatch Pulse Pro</span>
+          </div>
+          <div class="purchase-total">
+            <strong>$189,000</strong>
+          </div>
+          <span class="badge-shipped">Enviado</span>
+        </div>
+
+        <div class="purchase-item">
+          <div class="purchase-info">
+            <p><strong>#ORD-2026-003</strong></p>
+            <p>18 Abr 2026</p>
+          </div>
+          <div class="purchase-items">
+            <span>Kit Teclado + Mouse Pro</span>
+          </div>
+          <div class="purchase-total">
+            <strong>$119,000</strong>
+          </div>
+          <span class="badge-delivered">Entregado</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="profile-content">
+      <h2>Configuracion de cuenta</h2>
+      <div class="settings-group">
+        <h3>Notificaciones</h3>
+        <label class="checkbox">
+          <input type="checkbox" checked />
+          <span>Recibir alertas de pedidos</span>
+        </label>
+        <label class="checkbox">
+          <input type="checkbox" checked />
+          <span>Recibir promociones por correo</span>
+        </label>
+        <label class="checkbox">
+          <input type="checkbox" />
+          <span>Recibir SMS de seguimiento</span>
+        </label>
+      </div>
+
+      <div class="settings-group">
+        <h3>Privacidad</h3>
+        <label class="checkbox">
+          <input type="checkbox" checked />
+          <span>Permitir que otros usuarios vean mi perfil</span>
+        </label>
+        <label class="checkbox">
+          <input type="checkbox" checked />
+          <span>Compartir mi informacion con socios</span>
+        </label>
+      </div>
+
+      <div class="settings-group">
+        <h3>Seguridad</h3>
+        <button class="btn-secondary">Cambiar contrasena</button>
+        <button class="btn-secondary">Activar autenticacion de dos factores</button>
+      </div>
+    </article>
+  </section>
+</main>

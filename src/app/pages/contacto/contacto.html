@@ -1,0 +1,56 @@
+<main class="contact-page">
+  <section class="contact-shell">
+    <header class="contact-head">
+      <p class="kicker">Contacto NeoByte</p>
+      <h1>Conversemos tu proxima compra</h1>
+      <p class="lead">Cotizaciones, disponibilidad y asesoría técnica en un solo lugar.</p>
+    </header>
+
+    <div class="contact-grid">
+      <section class="contact-card" aria-label="Canales de contacto">
+        <h2>Canales directos</h2>
+        <ul class="contact-list">
+          <li>
+            <span>Correo</span>
+            <a href="mailto:ventas@neobyte.com">ventas@neobyte.com</a>
+          </li>
+          <li>
+            <span>Telefono</span>
+            <a href="tel:+56961234567">+56 9 6123 4567</a>
+          </li>
+          <li>
+            <span>WhatsApp</span>
+            <a href="https://wa.me/56961234567" target="_blank" rel="noopener noreferrer">Escribir por WhatsApp</a>
+          </li>
+          <li>
+            <span>Horario</span>
+            <p>Lunes a Sabado, 10:00 a 19:00</p>
+          </li>
+        </ul>
+      </section>
+
+      <section class="contact-card" aria-label="Formulario de contacto">
+        <h2>Formulario rapido</h2>
+        <form class="contact-form" [formGroup]="contactForm" (ngSubmit)="submitForm()">
+          <label for="nombre">Nombre</label>
+          <input id="nombre" type="text" formControlName="nombre" placeholder="Tu nombre" />
+
+          <label for="email">Correo</label>
+          <input id="email" type="email" formControlName="email" placeholder="correo@ejemplo.com" />
+
+          <label for="asunto">Asunto</label>
+          <input id="asunto" type="text" formControlName="asunto" placeholder="Cotizacion de notebook" />
+
+          <label for="mensaje">Mensaje</label>
+          <textarea id="mensaje" rows="4" formControlName="mensaje" placeholder="Cuéntanos lo que necesitas"></textarea>
+
+          <button type="submit" [disabled]="!canSubmit()">Enviar solicitud</button>
+        </form>
+
+        @if (sent()) {
+          <p class="sent-ok" role="status">Mensaje enviado. Te responderemos a la brevedad.</p>
+        }
+      </section>
+    </div>
+  </section>
+</main>

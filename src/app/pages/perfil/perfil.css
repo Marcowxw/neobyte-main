@@ -1,0 +1,326 @@
+.profile-page {
+  min-height: 100vh;
+  padding: 7rem 1rem 3rem;
+  color: #f0f8ff;
+  background:
+    radial-gradient(circle at 20% 10%, rgb(180 100 255 / 22%), transparent 38%),
+    radial-gradient(circle at 88% 70%, rgb(100 220 255 / 18%), transparent 42%),
+    linear-gradient(165deg, #1a0f2e 0%, #25152a 50%, #2a1e35 100%);
+}
+
+.shell {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.kicker {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.75rem;
+  color: #d89dff;
+}
+
+.hero h1 {
+  margin: 0.4rem 0;
+  font-size: clamp(1.7rem, 3vw, 2.4rem);
+}
+
+.back-link {
+  display: inline-block;
+  margin-top: 0.7rem;
+  color: #d99dff;
+}
+
+.profile-layout {
+  margin-top: 1.2rem;
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 1rem;
+}
+
+.profile-sidebar {
+  position: sticky;
+  top: 7.5rem;
+  height: fit-content;
+}
+
+.user-card {
+  border: 1px solid #5a3d7d;
+  border-radius: 14px;
+  padding: 1rem;
+  text-align: center;
+  background: linear-gradient(145deg, rgb(51 30 75 / 95%), rgb(40 25 60 / 95%));
+  margin-bottom: 0.8rem;
+}
+
+.avatar {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 0.6rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #b474ff 0%, #8b4fb8 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.user-card h2 {
+  margin: 0 0 0.3rem;
+  font-size: 1.1rem;
+}
+
+.user-card p {
+  margin: 0 0 0.7rem;
+  color: #d89dff;
+  font-size: 0.85rem;
+}
+
+.logout-btn {
+  width: 100%;
+  border: 1px solid #7a5d9d;
+  background: transparent;
+  color: #d89dff;
+  padding: 0.4rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.tabs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.tab {
+  border: 1px solid #4a2f68;
+  background: transparent;
+  color: #c0a8d8;
+  padding: 0.5rem 0.65rem;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s;
+}
+
+.tab.active {
+  border-color: #9d6ac2;
+  background: rgb(157 106 194 / 15%);
+  color: #e8c8ff;
+}
+
+.profile-content {
+  border: 1px solid #5a3d7d;
+  border-radius: 14px;
+  padding: 1.1rem;
+  background: linear-gradient(145deg, rgb(51 30 75 / 90%), rgb(40 25 60 / 90%));
+  margin-bottom: 1rem;
+}
+
+.profile-content h2 {
+  margin: 0 0 0.8rem;
+  font-size: 1.15rem;
+}
+
+.form-group {
+  margin-bottom: 0.8rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.25rem;
+  color: #d89dff;
+  font-size: 0.85rem;
+}
+
+.form-group p {
+  margin: 0;
+  color: #e8c8ff;
+}
+
+.btn-edit,
+.btn-secondary {
+  border: 1px solid #7a5d9d;
+  background: transparent;
+  color: #d89dff;
+  padding: 0.4rem 0.75rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+}
+
+.btn-add {
+  border: 1px dashed #7a5d9d;
+  background: transparent;
+  color: #d89dff;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 0.7rem;
+}
+
+.address-card,
+.payment-card {
+  border: 1px solid #4a2f68;
+  border-radius: 11px;
+  padding: 0.9rem;
+  background: rgb(40 25 60 / 50%);
+  margin-bottom: 0.7rem;
+}
+
+.address-header,
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.address-header h3,
+.card-header h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.card-type {
+  display: inline-block;
+  border: 1px solid #7a5d9d;
+  border-radius: 6px;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.75rem;
+}
+
+.badge-primary {
+  display: inline-block;
+  border-radius: 999px;
+  padding: 0.15rem 0.5rem;
+  font-size: 0.7rem;
+  background: rgb(157 106 194 / 20%);
+  color: #d89dff;
+}
+
+.address-card p,
+.payment-card p {
+  margin: 0.2rem 0;
+  color: #c0a8d8;
+  font-size: 0.85rem;
+}
+
+.purchase-list {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.purchase-item {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr 1fr auto;
+  gap: 0.7rem;
+  align-items: center;
+  border: 1px solid #4a2f68;
+  border-radius: 11px;
+  padding: 0.75rem;
+  background: rgb(40 25 60 / 50%);
+}
+
+.purchase-info p {
+  margin: 0;
+  color: #e8c8ff;
+  font-size: 0.85rem;
+}
+
+.purchase-items span {
+  color: #c0a8d8;
+  font-size: 0.8rem;
+}
+
+.purchase-total {
+  text-align: right;
+}
+
+.purchase-total strong {
+  color: #d89dff;
+}
+
+.badge-delivered,
+.badge-shipped {
+  display: inline-block;
+  border-radius: 999px;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.badge-delivered {
+  border: 1px solid #4fa05f;
+  background: rgb(79 160 95 / 15%);
+  color: #88d099;
+}
+
+.badge-shipped {
+  border: 1px solid #0099ff;
+  background: rgb(0 153 255 / 15%);
+  color: #66ccff;
+}
+
+.settings-group {
+  margin-bottom: 1rem;
+}
+
+.settings-group h3 {
+  margin: 0 0 0.5rem;
+  font-size: 0.95rem;
+  color: #d89dff;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.4rem;
+  cursor: pointer;
+  gap: 0.5rem;
+}
+
+.checkbox input {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.checkbox span {
+  color: #c0a8d8;
+  font-size: 0.85rem;
+}
+
+.btn-secondary {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+@media (max-width: 800px) {
+  .profile-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-sidebar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    position: static;
+    top: auto;
+  }
+
+  .tabs {
+    display: none;
+  }
+
+  .purchase-item {
+    grid-template-columns: 1fr;
+  }
+
+  .purchase-total {
+    text-align: left;
+  }
+}

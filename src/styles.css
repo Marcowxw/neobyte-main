@@ -1,0 +1,104 @@
+/* Global reset and app-wide background so no white canvas shows behind components. */
+:root {
+	color-scheme: dark;
+	--app-page-bg: #143731;
+	--app-page-bg-accent:
+		radial-gradient(circle at 14% 12%, rgba(206, 255, 140, 0.24), transparent 35%),
+		radial-gradient(circle at 82% 18%, rgba(206, 255, 140, 0.12), transparent 36%),
+		linear-gradient(180deg, #143731 0%, #18443c 48%, #102f2a 100%);
+	--app-text: #eff9df;
+	--app-muted: #a6c19e;
+	--app-accent: #ceff8c;
+	--app-accent-strong: #e7ffb8;
+	--app-surface: rgba(16, 52, 45, 0.94);
+	--app-surface-strong: rgba(12, 42, 37, 0.98);
+	--app-surface-soft: rgba(255, 255, 255, 0.04);
+	--app-border: rgba(206, 255, 140, 0.24);
+	--app-border-strong: rgba(206, 255, 140, 0.36);
+	--app-shadow: 0 18px 40px rgba(6, 22, 18, 0.34);
+	--app-success: #22c55e;
+	--app-danger: #ff4757;
+	--theme-transition-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+:root[data-theme='light'] {
+	color-scheme: light;
+	--app-page-bg: #ceff8c;
+	--app-page-bg-accent:
+		radial-gradient(circle at 12% 10%, rgba(20, 55, 49, 0.12), transparent 32%),
+		radial-gradient(circle at 84% 18%, rgba(20, 55, 49, 0.08), transparent 36%),
+		linear-gradient(180deg, #dcffae 0%, #ceff8c 54%, #c1f27f 100%);
+	--app-text: #143731;
+	--app-muted: #335f58;
+	--app-accent: #1f4d45;
+	--app-accent-strong: #143731;
+	--app-surface: rgba(245, 255, 227, 0.9);
+	--app-surface-strong: rgba(237, 249, 216, 0.98);
+	--app-surface-soft: rgba(20, 55, 49, 0.05);
+	--app-border: rgba(20, 55, 49, 0.16);
+	--app-border-strong: rgba(20, 55, 49, 0.24);
+	--app-shadow: 0 18px 40px rgba(20, 55, 49, 0.14);
+	--app-success: #167d3c;
+	--app-danger: #c53b4a;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+	min-height: 100%;
+	background: var(--app-page-bg);
+}
+
+body {
+	color: var(--app-text);
+	background-image: var(--app-page-bg-accent);
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+app-root {
+	display: block;
+	min-height: 100dvh;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+::view-transition-group(root) {
+	animation-duration: 0.65s;
+	animation-timing-function: var(--theme-transition-ease);
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+	animation: none;
+}
+
+::view-transition-new(root) {
+	animation: theme-reveal 0.65s var(--theme-transition-ease) both;
+	transform-origin: top right;
+}
+
+@keyframes theme-reveal {
+	from {
+		clip-path: circle(0% at calc(100% - 2rem) 1.7rem);
+	}
+	to {
+		clip-path: circle(150% at calc(100% - 2rem) 1.7rem);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	::view-transition-group(root),
+	::view-transition-old(root),
+	::view-transition-new(root) {
+		animation: none !important;
+	}
+
+	body {
+		background-attachment: scroll;
+	}
+}

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="Audifonos ANC Max">
+  <defs>
+    <linearGradient id="aBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#1d4ed8" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#aBg)" />
+  <path d="M280 280c0-95 55-165 120-165s120 70 120 165" fill="none" stroke="#e2e8f0" stroke-width="22" />
+  <rect x="220" y="250" width="80" height="140" rx="30" fill="#f8fafc" />
+  <rect x="500" y="250" width="80" height="140" rx="30" fill="#f8fafc" />
+  <circle cx="260" cy="320" r="24" fill="#60a5fa" />
+  <circle cx="540" cy="320" r="24" fill="#60a5fa" />
+</svg>

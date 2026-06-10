@@ -1,0 +1,225 @@
+<div class="confirmation-wrapper">
+  <!-- @if es el control flow moderno de Angular (reemplaza el clásico *ngIf en muchos casos) -->
+  <!-- Estado de carga -->
+  @if (loading()) {
+    <div class="loading-container">
+      <div class="spinner"></div>
+      <p>Procesando tu orden...</p>
+    </div>
+  }
+
+  <!-- Estado de error: solo aparece si terminó carga y hubo problema -->
+  @if (error() && !loading()) {
+    <div class="error-container">
+      <div class="error-icon">⚠️</div>
+      <h2>Error al cargar la orden</h2>
+      <p>{{ error() }}</p>
+      <button (click)="returnHome()" class="btn btn-primary">
+        Volver al inicio
+      </button>
+    </div>
+  }
+
+  <!-- Estado exitoso: requiere datos de orden y ausencia de error -->
+  @if (orderData() && !loading() && !error()) {
+    <div class="confirmation-container">
+      <!-- Encabezado de confirmación -->
+      <div class="success-header">
+        <div class="success-icon">✓</div>
+        <h1>¡Compra Confirmada!</h1>
+        <p class="subtitle">Tu orden ha sido registrada correctamente</p>
+      </div>
+
+      <!-- Comprobante principal que también se reutiliza para exportar/imprimir -->
+      <div id="order-receipt" class="order-receipt">
+        <!-- Cabecera del comprobante -->
+        <div class="receipt-header">
+          <div class="brand">
+            <h2>NEOBYTE</h2>
+            <p>Comprobante de Compra</p>
+          </div>
+          <div class="order-number">
+            <span class="label">Orden #</span>
+            <span class="number">{{ orderData()!.orderId }}</span>
+          </div>
+        </div>
+
+        <!-- Timeline visual para que el cliente entienda en qué etapa va el pedido -->
+        <div class="receipt-timeline">
+          <div class="timeline-item completed">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <span class="timeline-label">Orden Confirmada</span>
+              <span class="timeline-date"
+                >{{ orderData()!.createdAt | date : "dd/MM/yyyy, HH:mm" }}</span
+              >
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <span class="timeline-label">Procesando Pago</span>
+              <span class="timeline-date">En progreso...</span>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <span class="timeline-label">Pedido Enviado</span>
+              <span class="timeline-date">Pronto</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bloque datos cliente -->
+        <div class="info-section">
+          <h3>Información del Cliente</h3>
+          <div class="info-grid">
+            <div class="info-item">
+              <span class="info-label">Nombre completo</span>
+              <span class="info-value">{{ orderData()!.customerName }}</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">RUT</span>
+              <span class="info-value">{{ orderData()!.customerRut }}</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Telefono</span>
+              <span class="info-value">{{ orderData()!.customerPhone }}</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Email</span>
+              <span class="info-value">{{ orderData()!.customerEmail }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-section">
+          <h3>Entrega</h3>
+          <div class="info-grid">
+            <div class="info-item">
+              <span class="info-label">Metodo</span>
+              <span class="info-value">
+                {{ getDeliveryMethodLabel(orderData()!.deliveryMethod) }}
+              </span>
+            </div>
+            @if (orderData()!.deliveryMethod === 'despacho') {
+              <div class="info-item">
+                <span class="info-label">Direccion</span>
+                <span class="info-value">{{ orderData()!.customerAddress }}</span>
+              </div>
+            }
+          </div>
+        </div>
+
+        <!-- Resumen de ítems -->
+        <div class="order-summary">
+          <h3>Resumen del Pedido</h3>
+          <table class="items-table">
+            <thead>
+              <tr>
+                <th>Producto</th>
+                <th class="text-right">Cantidad</th>
+                <th class="text-right">Precio Unitario</th>
+                <th class="text-right">Subtotal</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- @for recorre ítems con track por id para render más eficiente -->
+              @for (item of orderData()!.items; track item.id) {
+                <tr>
+                  <td class="product-name">{{ item.name }}</td>
+                  <td class="text-right">{{ item.quantity }}</td>
+                  <td class="text-right">
+                    ${{ item.price | number : "1.0-0" : "es-CL" }}
+                  </td>
+                  <td class="text-right subtotal">
+                    ${{
+                      (item.price * item.quantity) | number : "1.0-0" : "es-CL"
+                    }}
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+
+          <div class="order-totals">
+            <div class="total-row">
+              <span>Total ({{ orderData()!.itemCount }} items)</span>
+              <span class="total-amount">
+                ${{ orderData()!.total | number : "1.0-0" : "es-CL" }}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Datos de pago -->
+        <div class="payment-info">
+          <h3>Información de Pago</h3>
+          <div class="payment-grid">
+            <div class="payment-item">
+              <span class="payment-label">Método</span>
+              <span class="payment-value">
+                {{ getPaymentMethodLabel(orderData()!.paymentMethod) }}
+              </span>
+            </div>
+            <div class="payment-item">
+              <span class="payment-label">Moneda</span>
+              <span class="payment-value">{{ orderData()!.currency }}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pie del comprobante -->
+        <div class="receipt-footer">
+          <p>Gracias por tu compra en Neobyte</p>
+          <p class="small-text">
+            Se ha enviado una confirmación a tu correo electrónico
+          </p>
+        </div>
+      </div>
+
+      <!-- Acciones rápidas: exportar PDF, Excel o imprimir -->
+      <div class="action-buttons">
+        <button
+          (click)="downloadPDF()"
+          [disabled]="downloadingPDF()"
+          class="btn btn-primary btn-lg"
+        >
+          @if (downloadingPDF()) {
+            <span class="loading-text">Generando PDF...</span>
+          } @else {
+            <span class="btn-icon">📄</span>
+            <span>Descargar PDF</span>
+          }
+        </button>
+
+        <button
+          (click)="downloadExcel()"
+          [disabled]="downloadingExcel()"
+          class="btn btn-secondary btn-lg"
+        >
+          @if (downloadingExcel()) {
+            <span class="loading-text">Generando Excel...</span>
+          } @else {
+            <span class="btn-icon">📊</span>
+            <span>Descargar Excel</span>
+          }
+        </button>
+
+        <button (click)="print()" class="btn btn-outline btn-lg">
+          <span class="btn-icon">🖨️</span>
+          <span>Imprimir</span>
+        </button>
+      </div>
+
+      <!-- Acción secundaria para volver al flujo principal -->
+      <div class="secondary-actions">
+        <button (click)="returnHome()" class="link-button">
+          <!-- Vuelta simple, bien "a la chilena": clara y sin vueltas -->
+          ← Volver al inicio
+        </button>
+      </div>
+    </div>
+  }
+</div>

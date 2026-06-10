@@ -1,0 +1,48 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function role() {
+      return signedIn() ? request.auth.token.role : null;
+    }
+
+    function isAdmin() {
+      return signedIn() && (role() == 'admin' || role() == 'super_admin' || role() == 'superadmin');
+    }
+
+    function isSuperAdmin() {
+      return signedIn() && (role() == 'super_admin' || role() == 'superadmin');
+    }
+
+    // Carrito publico de la app: lectura y escritura libre.
+    match /carts/{cartId}/{document=**} {
+      allow read, write: if true;
+    }
+
+    // Ordenes: solo usuarios autenticados crean;
+    // solo el dueño (userId) o un admin pueden leer y actualizar.
+    match /orders/{order} {
+      allow create: if signedIn();
+      allow read, update: if signedIn() && (request.auth.uid == resource.data.userId || isAdmin());
+      allow delete: if isSuperAdmin();
+    }
+
+    // Perfil de usuario: cada persona puede gestionar su propio documento.
+    // Solo superadmin puede modificar el rol de terceros.
+    match /users/{userId} {
+      allow read: if signedIn();
+      allow create: if signedIn() && request.auth.uid == userId;
+      allow update: if signedIn() && (request.auth.uid == userId || isSuperAdmin());
+      allow delete: if isSuperAdmin();
+    }
+
+    // Cualquier dato administrativo debe quedar restringido al superadmin.
+    match /admin/{document=**} {
+      allow read, write: if isSuperAdmin();
+    }
+  }
+}
