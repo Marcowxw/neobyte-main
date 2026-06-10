@@ -151,7 +151,6 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
     image: {
       src: '/images/kit_perifericos.png',
       alt: 'Kit profesional de teclado mecánico y mouse',
-      photo: true,
     },
   },
   {
@@ -164,7 +163,6 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
     image: {
       src: '/images/razer_mouse.png',
       alt: 'Mouse ergonómico inalámbrico para productividad',
-      photo: true,
     },
   },
   {
@@ -177,7 +175,6 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
     image: {
       src: '/images/hub_domotica.png',
       alt: 'Hub de domótica inteligente Wi-Fi 6',
-      photo: true,
     },
   },
   {
@@ -190,7 +187,6 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
     image: {
       src: '/images/router.png',
       alt: 'Sistema de red mesh Wi-Fi 6E para hogar',
-      photo: true,
     },
   },
   {
@@ -203,7 +199,6 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
     image: {
       src: '/images/laptop.png',
       alt: 'Laptop de 16" profesional para creadores',
-      photo: true,
     },
   },
   {
@@ -214,22 +209,20 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
     description: 'Pantalla 165Hz, RTX dedicada y teclado RGB por zona.',
     category: 'laptops',
     image: {
-      src: '/images/Laptop_15.png',
+      src: '/images/laptop_15.png',
       alt: 'Laptop gamer de 15 pulgadas con tarjeta gráfica dedicada',
-      photo: true,
     },
   },
   {
     id: 'smartphone-neo-x',
     name: 'Smartphone Neo X 256GB',
-    price: 689000,
+    price: 649000,
     badge: 'Celulares',
     description: 'Pantalla OLED 120Hz, cámara de 50MP y carga rápida de 65W.',
     category: 'celulares',
     image: {
       src: '/images/telefono_neox.png',
       alt: 'Smartphone Neo X de 256GB',
-      photo: true,
     },
   },
   {
@@ -242,7 +235,6 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
     image: {
       src: '/images/telefono_andes.png',
       alt: 'Celular Andes Pro 5G de 512GB',
-      photo: true,
     },
   },
   {
@@ -256,7 +248,6 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
     image: {
       src: '/images/telefono_lite.png',
       alt: 'Smartphone económico Neo Lite de 128GB',
-      photo: true,
     },
   },
   {
